@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pl">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Logowanie</title>
+    <th:block th:replace="fragments/header :: header-css"/>
+    <link rel="stylesheet" th:href="@{/css/signin.css}"/>
+
+<body class="text-center">
+<div th:replace="fragments/header :: header"></div>
+<form class="form-signin" th:action="@{/login-process}" method="post">
+
+    <h1 class="h3 mb-3 font-weight-normal">Zaloguj się</h1>
+    <label for="inputEmail" class="sr-only">Email address</label>
+    <input type="email" name="username" id="inputEmail" class="form-control" placeholder="Email" required autofocus>
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Hasło" required>
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Zaloguj się</button>
+</form>
+<p class="error" th:if="${param.error}" th:text="'Podany login lub hasło są nieprawidłowe'"></p>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring Boot and Thymeleaf example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <div th:replace="fragments/header :: header-css"/>
+
+</head>
+<body>
+<div th:replace="fragments/header :: header"/>
+<h3>Poprawnie zarejestrowano użytkownika</h3>
+
+<tr>
+    <td>Imię:</td>
+    <p th:text="${customerRegistrationDto.firstName}"/>
+</tr>
+<tr>
+    <td>Nazwisko:</td>
+    <p th:text="${customerRegistrationDto.getSurname}"/>
+
+</tr>
+<tr>
+    <td>Kod pocztowy:</td>
+    <p th:text="${customerRegistrationDto.zipCode}"/>
+    <td>Miasto:</td>
+    <p th:text="${customerRegistrationDto.city}"/>
+    <td>Ulica:</td>
+    <p th:text="${customerRegistrationDto.street}"/>
+    <td>Kraj:</td>
+    <p th:text="${customerRegistrationDto.country}"/>
+</tr>
+<tr>
+    <td>Data urodzenia:</td>
+    <p th:text="${customerRegistrationDto.birthDate}"/>
+</tr>
+<tr>
+    <td>PESEL:</td>
+    <p th:text="${customerRegistrationDto.pesel}"/>
+
+</tr>
+<tr>
+    <td>Email:</td>
+    <p th:text="${customerRegistrationDto.email}"/>
+
+</tr>
+
+<tr>
+    <td>Numer Telefonu:</td>
+    <p th:text="${customerRegistrationDto.phone}"/>
+
+</tr>
+<div th:replace="fragments/footer :: footer"></div>
+</body>
+</html>

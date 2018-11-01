@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Todos</title>
+    <th:block th:replace="fragments/header :: header-css"/>
+  <link th:href="@{/css/todos.css}" href="../static/css/todos.css" rel="stylesheet" media="screen" />
+
+</head>
+<body>
+<th:block th:replace="fragments/header :: header"/>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="todolist not-done">
+
+                <h1 th:text="${@userContextHolder.getUserLoggedIn()}">User</h1><h2>Zadania</h2>
+
+                <input type="text" class="form-control add-todo" placeholder="Add todo">
+
+                <button id="checkAll" class="btn btn-success">Oznacz wszystkie jako wykonane</button>
+
+                <hr>
+                <ul id="sortable" class="list-unstyled">
+
+                    <li class="ui-state-default" th:each="todo : ${todosList}">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" value="" />
+                                <p th:text="${todo.todoValue}"></p>
+                            </label>
+                        </div>
+                    </li>
+                </ul>
+                <div class="todo-footer">
+                    <li>
+                        <strong><span class="count-todos"></span></strong> Zadań do wykonania
+                    </li>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="todolist">
+                <h1>Wykonane zadania</h1>
+                <ul id="done-items" class="list-unstyled">
+                    <li th:each="todos : ${todosDoneList}">
+                        <p th:text="${todos.todoValue}"></p>
+                        <button class="remove-item btn btn-default btn-xs pull-right" style="margin-top: -25px;">
+                            <span class="glyphicon glyphicon-remove"></span>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:replace="fragments/footer :: footer"></div>
+
+<script th:src="@{/js/todos.js}" type="text/javascript"></script>
+
+</body>
+</html>
