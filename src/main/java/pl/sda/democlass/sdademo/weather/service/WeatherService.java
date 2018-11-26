@@ -41,7 +41,7 @@ public class WeatherService {
 
         Optional<User> userByUsername = usersService.getUserByEmail(userContextHolder.getUserLoggedIn());
         CompletableFuture<WeatherResult> forecast1 = openWeatherMapJ8.currentByCity(
-                userByUsername.map(e -> e.getUserAddress().getCity() + "," + e.getUserAddress().getCountry().toUpperCase()).orElse(""),
+                userByUsername.map(e -> e.getUserAddress().getCity() + "," + e.getUserAddress().getCountry().toUpperCase()).orElse("Warszawa,pl"),
                 key,
                 "metric",
                 "pl"

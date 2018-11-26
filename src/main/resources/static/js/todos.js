@@ -13,6 +13,8 @@ $('#addTodo').on('click', function () {
     var calendarValue = $('#calendar').val();
     if (taskValue != '' && calendarValue != '') {
         createTodo(taskValue, calendarValue);
+    }else {
+        alert("Wypełnij pola dotyczące zadania.")
     }
 });
 
