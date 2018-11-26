@@ -22,6 +22,9 @@ public class TodosService {
 
 
     public void addTodos(String todoValue, String calendarValue) throws ParseException {
+        if (todosRepository.findByName(todoValue, getCurrentUser().getEmail()) != null) {
+            throw new RuntimeException("TODO istnieje");
+        }
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date parsedTime = format.parse(calendarValue);
         Todo todo = new Todo(todoValue,parsedTime , getCurrentUser().getEmail(), false);

@@ -17,7 +17,6 @@ import java.util.Date;
 @NoArgsConstructor
 public class Todo extends BaseEntity {
 
-    @Column(unique = true)
     private String todoValue;
 
     @Temporal(TemporalType.TIMESTAMP)
