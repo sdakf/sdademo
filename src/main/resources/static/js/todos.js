@@ -21,7 +21,6 @@ $('.todolist').on('change', '#sortable li input[type="checkbox"]', function () {
     if (checkBox.prop('checked')) {
         var predicate = $('p.tvalue');
         var doneItem = checkBox.parent().parent().find(predicate).text();
-console.log(doneItem)
         $.ajax({
             url: '/todos/' + doneItem,
             type: 'PUT',
@@ -58,7 +57,7 @@ function createTodo(text, calendarValue) {
                 ' <table style="width: 100%">\n' +
                 '                                    <tr>\n' +
                 '                                        <td width="50%"><p class="tvalue">'+text+'</p></td>\n' +
-                '                                        <td width="50%" style="text-align: right"><p>'+new Date('0005-05-05T05:05').toISOString().replace(/[T]/g, " ").substring(0,16)+'</p></td>\n' +
+                '                                        <td width="50%" style="text-align: right"><p>'+toDate(new Date(calendarValue).toISOString().replace(/[T]/g, " ").substring(0,11))+'</p></td>\n' +
                 '                                    </tr>\n' +
                 '                                </table>'
                 '</label></div></li>';
@@ -72,13 +71,12 @@ function createTodo(text, calendarValue) {
             alert('Nie można dodać !');
         })
 }
-function formatDate(date) {
-    console.log(date)
-    var date = new Date(date);
-    return date.toDateString()
+function toDate(dateStr) {
+    var parts = dateStr.split("-")
+    return parts[2].trim() + "-" + (parts[1]).trim() + "-" + parts[0].trim();
 }
 function done(done) {
-    var markup = '<li><p>' + done + '</p><button class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>';
+    var markup = '<li><p>' + done + '</p><button class="btn btn-default btn-xs pull-right  remove-item" style="margin-top: -25px;"><span class="glyphicon glyphicon-remove"></span></button></li>';
     $('#done-items').append(markup);
     $('.remove').remove();
 }
@@ -101,7 +99,7 @@ function markAllAsDone() {
             type: 'PUT',
             async: false,
             success: function () {
-                $('#done-items').append('<li><p>' + text + '</p><button class="btn btn-default btn-xs pull-right  remove-item"><span class="glyphicon glyphicon-remove"></span></button></li>');
+                $('#done-items').append('<li><p>' + text + '</p><button class="btn btn-default btn-xs pull-right  remove-item" style="margin-top: -25px;"><span class="glyphicon glyphicon-remove"></span></button></li>');
             },
             error: function () {
                 notAddedTasks.push(text);
@@ -134,3 +132,7 @@ function removeItem(element) {
     });
 
 }
+
+// $(function() {
+//     $( "#calendar" ).datepicker({ dateFormat: 'yy-mm-dd'});
+// });

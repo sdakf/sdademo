@@ -20,7 +20,8 @@
                 <input id="task" type="text" class="calendar-input add-todo" placeholder="Zadanie">
                 <br>
                 <label for="calendar">Określ termin</label>
-                <input id="calendar" class="calendar-input"type="datetime-local" placeholder="Termin">
+                <input id="calendar" class="calendar-input"type="date" placeholder="Termin">
+                <br>
                 <button id="addTodo" class="btn btn-success">Dodaj zadanie</button>
 
                 <hr>
@@ -34,7 +35,7 @@
                                 <table style="width: 100%">
                                     <tr>
                                         <td width="50%"><p class="tvalue" th:text="${todo.todoValue}"></p></td>
-                                        <td width="100%" style="text-align: right"><p  th:text="${#dates.format(todo.deadline, 'dd-MM-yyyy HH:mm')}"></p></td>
+                                        <td width="100%" style="text-align: right"><p  th:text="${#dates.format(todo.deadline, 'dd-MM-yyyy')}"></p></td>
                                     </tr>
                                 </table>
                             </label>
