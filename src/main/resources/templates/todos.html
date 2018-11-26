@@ -5,8 +5,6 @@
     <title>Todos</title>
     <th:block th:replace="fragments/header :: header-css"/>
     <link th:href="@{/css/todos.css}" href="../static/css/todos.css" rel="stylesheet" media="screen"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/jsCalendar.css">
-    <script type="text/javascript" src="../static/js/calendar/jsCalendar.js"></script>
 </head>
 <body>
 <th:block th:replace="fragments/header :: header"/>
@@ -39,10 +37,7 @@
                                         <td width="100%" style="text-align: right"><p  th:text="${#dates.format(todo.deadline, 'dd-MM-yyyy HH:mm')}"></p></td>
                                     </tr>
                                 </table>
-
-
                             </label>
-
                         </div>
 
                     </li>
