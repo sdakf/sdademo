@@ -5,7 +5,10 @@ import lombok.Getter;
 @Getter
 public enum Countries {
 
-    POLAND("PL","Polska"), GERMANY("DE", "Niemcy"), ENGLAND("ENG", "Anglia"), FRANCE("FRA", "Francja");
+    POLAND("PL","Polska"),
+    GERMANY("DE", "Niemcy"),
+    ENGLAND("ENG", "Anglia"),
+    FRANCE("FRA", "Francja");
 
     private String symbol;
     private String plName;
