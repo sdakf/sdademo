@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <title>Todos</title>
     <th:block th:replace="fragments/header :: header-css"/>
-  <link th:href="@{/css/todos.css}" href="../static/css/todos.css" rel="stylesheet" media="screen" />
-
+    <link th:href="@{/css/todos.css}" href="../static/css/todos.css" rel="stylesheet" media="screen"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/jsCalendar.css">
+    <script type="text/javascript" src="../static/js/calendar/jsCalendar.js"></script>
 </head>
 <body>
 <th:block th:replace="fragments/header :: header"/>
@@ -15,27 +16,41 @@
         <div class="col-md-6">
             <div class="todolist not-done">
 
-                <h1 th:text="${@userContextHolder.getUserLoggedIn()}">User</h1><h2>Zadania</h2>
-
-                <input type="text" class="form-control add-todo" placeholder="Add todo">
-
-                <button id="checkAll" class="btn btn-success">Oznacz wszystkie jako wykonane</button>
+                <h1 th:text="${@userContextHolder.getUserLoggedIn()}">User</h1>
+                <h2>Określ zadanie:</h2>
+                <label for="task">Tytuł zadania</label>
+                <input id="task" type="text" class="calendar-input add-todo" placeholder="Zadanie">
+                <br>
+                <label for="calendar">Określ termin</label>
+                <input id="calendar" class="calendar-input"type="datetime-local" placeholder="Termin">
+                <button id="addTodo" class="btn btn-success">Dodaj zadanie</button>
 
                 <hr>
+                <h2>Zadania do wykonania:</h2>
                 <ul id="sortable" class="list-unstyled">
 
                     <li class="ui-state-default" th:each="todo : ${todosList}">
                         <div class="checkbox">
-                            <label>
-                                <input type="checkbox" value="" />
-                                <p th:text="${todo.todoValue}"></p>
+                            <label style="width: 100%">
+                                <input type="checkbox" value=""/>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td width="50%"><p class="tvalue" th:text="${todo.todoValue}"></p></td>
+                                        <td width="100%" style="text-align: right"><p  th:text="${#dates.format(todo.deadline, 'dd-MM-yyyy HH:mm')}"></p></td>
+                                    </tr>
+                                </table>
+
+
                             </label>
+
                         </div>
+
                     </li>
                 </ul>
+                <button id="checkAll" class="btn btn-success">Oznacz wszystkie jako wykonane</button>
                 <div class="todo-footer">
                     <li>
-                        <strong><span class="count-todos"></span></strong> Zadań do wykonania
+                        <strong><span id="count-todos"></span></strong> Zadań do wykonania
                     </li>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="pl">
 
 <head>
 
@@ -8,9 +8,8 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <div th:replace="fragments/header :: header-css"/>
-    <!-- Bootstrap core CSS -->
-    <!--<link rel="stylesheet" th:href="@{/main.css}"/></head>-->
+    <th:block th:replace="fragments/header :: header-css"/>
+    <title>Strona główna</title>
 
 <body>
 <div th:replace="fragments/header :: header"></div>

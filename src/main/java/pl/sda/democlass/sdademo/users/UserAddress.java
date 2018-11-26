@@ -23,6 +23,5 @@ public class UserAddress {
     private String street;
     private String city;
     private String country;
-    @Column(name = "postal_code")
     private String zipCode;
 }

@@ -7,6 +7,6 @@ import java.util.Optional;
 
 public interface UsersRepository extends JpaRepository<User, Long> {
 
-    @Query("select u from User u where upper(u.username) = upper(:username) ")
-    Optional<User> findUserByUsername(String username);
+    @Query("select u from User u where upper(u.email) = upper(?1) ")
+    Optional<User> findUserByEmail(String email);
 }

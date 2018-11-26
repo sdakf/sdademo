@@ -8,6 +8,7 @@ import pl.sda.democlass.sdademo.BaseEntity;
 import pl.sda.democlass.sdademo.users.User;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Getter
@@ -19,10 +20,10 @@ public class Todo extends BaseEntity {
     @Column(unique = true)
     private String todoValue;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User todoUser;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date deadline;
+
+    private String userEmail;
 
     private boolean completed;
-
 }

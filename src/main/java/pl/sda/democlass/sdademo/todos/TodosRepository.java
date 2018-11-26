@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface TodosRepository extends JpaRepository<Todo,Long> {
 
-    List<Todo> findByCompletedAndTodoUserId(boolean completed, Long Id);
+    List<Todo> findByCompletedAndUserEmail(boolean completed, String userEmail);
 
-    @Query("select t from Todo t join User u on t.todoUser = u where t.todoValue = ?1 and u.id = ?2")
-    Todo findByName(String name, Long currentUserId);
+    @Query("select t from Todo t where t.todoValue = ?1 and t.userEmail = ?2")
+    Todo findByName(String name, String userEmail);
 }

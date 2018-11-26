@@ -14,19 +14,14 @@ import java.util.Set;
 @Getter
 @Entity
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name = "userType", discriminatorType = DiscriminatorType.STRING)
 public class User extends BaseEntity {
     private String firstName;
     private String surName;
-    private String username;
+    private String email;
     private String pesel;
     private String passwordHash;
     private UserAddress userAddress;
     private String birthDate;
-
-    @OneToMany(mappedBy = "todoUser")
-    private Set<Todo> todos;
 
     @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
     @JoinTable(name = "user_role")

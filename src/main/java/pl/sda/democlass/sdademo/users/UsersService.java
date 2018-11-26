@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 import java.util.Optional;
 
 @Service
-public class UsersDao {
+public class UsersService {
 
     @Autowired
     private UsersRepository usersRepository;
@@ -17,29 +17,29 @@ public class UsersDao {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private RolesRepository rolesRepository;
+
     public void addUser(User user) {
-        Role role = new Role();
-        role.setRoleName("ROLE_USER");
-        user.setRoles(Sets.newHashSet(role));
+        user.setRoles(Sets.newHashSet(rolesRepository.findByRoleName("ROLE_USER")));
         usersRepository.save(user);
     }
 
-    public Optional<User> getUserByUsername(String username) {
-        return usersRepository.findUserByUsername(username);
+    public Optional<User> getUserByEmail(String email) {
+        return usersRepository.findUserByEmail(email);
     }
 
     @PostConstruct
     public void initialize() {
-        registerNewUser("admin@admin.pl", "admin", "ROLE_ADMIN");
         registerNewUser("user@user.pl", "user", "ROLE_USER");
     }
 
     private void registerNewUser(String username, String pass, String roleName) {
-        if (usersRepository.findUserByUsername(username).isPresent()) {
+        if (usersRepository.findUserByEmail(username).isPresent()) {
             return;
         }
         User user = new User();
-        user.setUsername(username);
+        user.setEmail(username);
         user.setUserAddress(new UserAddress("A", "Lodz", "PL", "92-001"));
         Role role = new Role();
         role.setRoleName(roleName);

@@ -18,8 +18,8 @@
     <div class="error" th:errors="*{firstName}"></div>
 
     <label for="surname">Nazwisko:</label>
-    <input id="surname" type="text" th:field="${customerRegistrationDto.surname}" autofocus class="form-control"/>
-    <div class="error" th:errors="*{surname}"></div>
+    <input id="surname" type="text" th:field="${customerRegistrationDto.lastName}" autofocus class="form-control"/>
+    <div class="error" th:errors="*{lastName}"></div>
 
     <label for="zipcode">Kod pocztowy:</label>
     <input id="zipcode" type="text" th:field="${customerRegistrationDto.zipCode}"  autofocus class="form-control"/>

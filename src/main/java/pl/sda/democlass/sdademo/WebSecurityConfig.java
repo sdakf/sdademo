@@ -26,7 +26,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/todos/**").hasAnyAuthority("ROLE_USER","ROLE_ADMIN")
+                .antMatchers("/todos/**").hasAnyAuthority("ROLE_USER")
                 .antMatchers("/login").permitAll()
                 .antMatchers("/console/**").permitAll()
                 .antMatchers("/h2/**").permitAll()
@@ -36,7 +36,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable().and()
                 .formLogin()
                 .loginPage("/login")
-                .usernameParameter("username")
+                .usernameParameter("email")
                 .passwordParameter("password")
                 .loginProcessingUrl("/login-process")
                 .failureUrl("/login?error")
@@ -47,12 +47,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
-                .usersByUsernameQuery("SELECT u.username, u.password_hash,1 FROM user u WHERE u.username=?")
-                .authoritiesByUsernameQuery("SELECT u.username, r.role_name, 1 " +
+                .usersByUsernameQuery("SELECT u.email, u.password_hash,1 FROM user u WHERE u.email=?")
+                .authoritiesByUsernameQuery("SELECT u.email, r.role_name, 1 " +
                         "FROM user u " +
                         "INNER JOIN user_role ur ON ur.user_id = u.id " +
                         "INNER JOIN role r ON r.id = ur.roles_id " +
-                        "WHERE u.username=?")
+                        "WHERE u.email=?")
                 .dataSource(dataSource)
                 .passwordEncoder(bCryptPasswordEncoder)
         ;

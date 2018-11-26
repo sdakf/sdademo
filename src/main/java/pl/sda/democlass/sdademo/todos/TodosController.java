@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.Serializable;
+import java.text.ParseException;
+import java.util.Date;
 
 @Controller
 @RequestMapping("/todos")
-public class TodosController implements Serializable {
+public class TodosController {
 
     @Autowired
     private TodosService todosService;
@@ -26,9 +28,9 @@ public class TodosController implements Serializable {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/{todoValue}", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> addTodos(@PathVariable("todoValue") String todoValue) {
-        todosService.addTodos(todoValue);
+    @RequestMapping(value = "/{todoValue}/{calendar}", method = RequestMethod.POST, produces = MediaType.TEXT_PLAIN_VALUE)
+    public ResponseEntity<String> addTodos(@PathVariable("todoValue") String todoValue,@PathVariable String calendar) throws ParseException {
+        todosService.addTodos(todoValue,calendar);
         return ResponseEntity.ok("OK");
     }
 
