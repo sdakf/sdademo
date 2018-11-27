@@ -70,7 +70,7 @@ function createTodo(text, calendarValue) {
 
         })
         .fail(function (jqXHR, textStatus, errorThrown) {
-            alert('Nie można dodać !');
+            alert('Nie można dodać, zadanie o takiej nazwie istnieje!');
         })
 }
 function toDate(dateStr) {
