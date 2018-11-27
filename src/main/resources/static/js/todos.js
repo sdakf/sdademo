@@ -134,7 +134,3 @@ function removeItem(element) {
     });
 
 }
-
-// $(function() {
-//     $( "#calendar" ).datepicker({ dateFormat: 'yy-mm-dd'});
-// });

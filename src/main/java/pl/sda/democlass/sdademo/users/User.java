@@ -15,15 +15,16 @@ import java.util.Set;
 @Entity
 @NoArgsConstructor
 public class User extends BaseEntity {
+    //todo 1 - uzupełnić pola użytkownika
     private String firstName;
     private String surName;
     private String email;
     private String pesel;
     private String passwordHash;
-    private UserAddress userAddress;
     private String birthDate;
+    private UserAddress userAddress;
 
-    @ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "user_role")
     private Set<Role> roles;
 }

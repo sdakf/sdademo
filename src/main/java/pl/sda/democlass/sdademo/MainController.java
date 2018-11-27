@@ -55,8 +55,9 @@ public class MainController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerEffect(@ModelAttribute @Valid CustomerRegistrationDto customerRegistrationDto, BindingResult bindingResult, Model model) {
         model.addAttribute("customerRegistrationDto", customerRegistrationDto);
+        model.addAttribute("countries", Countries.values());
+        //todo 3 - w przypadku błędów walidacji należy przekierować ponownie na formularz rejestracji
         if (bindingResult.hasErrors()) {
-            model.addAttribute("countries", Countries.values());
             return "registerForm";
         }
         try {

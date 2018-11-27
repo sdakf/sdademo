@@ -29,25 +29,34 @@ public class WeatherService {
         this.usersService = usersService;
     }
 
+    private Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl("http://api.openweathermap.org/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(Java8CallAdapterFactory.create())
+            .build();
+
+    private OpenWeatherMapJ8 openWeatherMapJ8 =
+            retrofit.create(OpenWeatherMapJ8.class);
+
     public String getWeather() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://api.openweathermap.org/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(Java8CallAdapterFactory.create())
-                .build();
 
-        OpenWeatherMapJ8 openWeatherMapJ8 =
-                retrofit.create(OpenWeatherMapJ8.class);
+        String city = null;
+        String country = null;
 
-        Optional<User> userByUsername = usersService.getUserByEmail(userContextHolder.getUserLoggedIn());
-        CompletableFuture<WeatherResult> forecast1 = openWeatherMapJ8.currentByCity(
-                userByUsername.map(e -> e.getUserAddress().getCity() + "," + e.getUserAddress().getCountry().toUpperCase()).orElse("Warszawa,pl"),
-                key,
-                "metric",
-                "pl"
-        );
+        String userEmail = userContextHolder.getUserLoggedIn();
+        User user = usersService.getUserByEmail(userEmail).orElse(null);
+        //todo 8 - należy uzupełnić wartości city i country w zależności od tego czy użytkownik jest zalogowany czy nie
+        if (user == null) {
+            city = "Warszawa";
+            country = "pl";
+        } else {
+            city = user.getUserAddress().getCity();
+            country = user.getUserAddress().getCountry();
+        }
+        String cityWithCountry = city + "," + country.toUpperCase();
+        CompletableFuture<WeatherResult> forecast = openWeatherMapJ8.currentByCity(cityWithCountry, key, "metric", "pl");
 
-        return downloadWeather(forecast1);
+        return downloadWeather(forecast);
     }
 
     private String downloadWeather(CompletableFuture<WeatherResult> forecast) {
@@ -56,6 +65,5 @@ public class WeatherService {
                 .exceptionally(throwable -> {
                     throw new RuntimeException("Błąd");
                 }).join();
-
     }
 }

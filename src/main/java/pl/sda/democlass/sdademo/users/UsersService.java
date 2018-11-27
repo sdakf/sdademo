@@ -6,6 +6,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -31,21 +32,31 @@ public class UsersService {
 
     @PostConstruct
     public void initialize() {
-        registerNewUser("user@user.pl", "user", "ROLE_USER");
+        registerNewMockUser("user@user.pl", "user", "ROLE_USER");
     }
 
-    private void registerNewUser(String username, String pass, String roleName) {
+    private void registerNewMockUser(String username, String pass, String roleName) {
         if (usersRepository.findUserByEmail(username).isPresent()) {
             return;
         }
-        User user = new User();
-        user.setEmail(username);
-        user.setUserAddress(new UserAddress("A", "Lodz", "PL", "92-001"));
-        Role role = new Role();
-        role.setRoleName(roleName);
-        user.setRoles(Sets.newHashSet(role));
-        user.setPasswordHash(passwordEncoder.encode(pass));
-        usersRepository.save(user);
+        boolean userExists = false;
+        List<User> users = usersRepository.findAll();
+        //todo 11 - tworzymy testowego użytkownika tylko jeśli już taki nie istnieje
+        for (User user : users) {
+            if (username.equalsIgnoreCase(user.getEmail())) {
+                userExists = true;
+                break;
+            }
+        }
+        if (!userExists) {
+            User user = new User();
+            user.setEmail(username);
+            user.setUserAddress(new UserAddress("Kilinskiego", "Lodz", "PL", "92-001"));
+            Role role = new Role();
+            role.setRoleName(roleName);
+            user.setRoles(Sets.newHashSet(role));
+            user.setPasswordHash(passwordEncoder.encode(pass));
+            usersRepository.save(user);
+        }
     }
-
 }

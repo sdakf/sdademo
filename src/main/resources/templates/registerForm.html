@@ -47,20 +47,20 @@
 
     <label for="inputPesel"> PESEL:</label>
     <input id="inputPesel" type="text"  autofocus class="form-control" th:field="${customerRegistrationDto.pesel}"/>
-    <div class="error" th:errors="*{birthDate}"></div>
+    <div class="error" th:errors="*{pesel}"></div>
 
 
     <label for="inputEmail">Email </label>
     <input type="email" id="inputEmail"  autofocus class="form-control" th:field="${customerRegistrationDto.email}"/>
-    <div class="error" th:errors="*{birthDate}"></div>
+    <div class="error" th:errors="*{email}"></div>
 
     <label for="passw">Hasło:</label>
     <input id="passw" type="text" th:field="${customerRegistrationDto.password}"  autofocus class="form-control"/>
-    <div class="error" th:errors="*{birthDate}"></div>
+    <div class="error" th:errors="*{password}"></div>
 
     <label for="phone">Numer Telefonu:</label>
     <input id="phone" type="text" th:field="${customerRegistrationDto.phone}"  autofocus class="form-control"/>
-    <div class="error" th:errors="*{birthDate}"></div>
+    <div class="error" th:errors="*{phone}"></div>
 
     <input id="mailing" type="checkbox" th:field="${customerRegistrationDto.preferEmails}"/>
     <label for="mailing">Chcę otrzymywać informacje listownie</label>

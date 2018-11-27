@@ -20,6 +20,7 @@ import java.util.List;
 @NoArgsConstructor
 public class UserAddress {
 
+    //todo 6 - uzupełnienie pól adresu
     private String street;
     private String city;
     private String country;

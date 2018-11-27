@@ -9,7 +9,9 @@ import pl.sda.democlass.sdademo.users.UsersRepository;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class TodosService {
@@ -27,7 +29,7 @@ public class TodosService {
         }
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date parsedTime = format.parse(calendarValue);
-        Todo todo = new Todo(todoValue,parsedTime , getCurrentUser().getEmail(), false);
+        Todo todo = new Todo(todoValue, parsedTime, getCurrentUser().getEmail(), false);
         todosRepository.save(todo);
     }
 
@@ -48,8 +50,22 @@ public class TodosService {
 
     public void findByCompletedAndUserId(Model model) {
         User currentUser = getCurrentUser();
-        model.addAttribute("todosList", todosRepository.findByCompletedAndUserEmail(false, currentUser.getEmail()));
-        model.addAttribute("todosDoneList", todosRepository.findByCompletedAndUserEmail(true, currentUser.getEmail()));
+        List<Todo> allTodos = todosRepository.findAll();
+        //todo 13 - należy uzupełnić dla aktualnego użytkownika listy zadań do zrobienia oraz zrobionych
+        List<Todo> doneList = new ArrayList<>();
+        List<Todo> todoList = new ArrayList<>();
+        for (Todo todo : allTodos) {
+            if (!todo.getUserEmail().equalsIgnoreCase(currentUser.getEmail())) {
+                continue;
+            }
+            if (todo.isCompleted()) {
+                doneList.add(todo);
+            } else {
+                todoList.add(todo);
+            }
+        }
+        model.addAttribute("todosList", todoList);
+        model.addAttribute("todosDoneList", doneList);
     }
 
     public User getCurrentUser() {

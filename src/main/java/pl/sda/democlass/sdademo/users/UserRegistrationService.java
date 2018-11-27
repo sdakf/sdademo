@@ -16,12 +16,23 @@ public class UserRegistrationService {
         this.usersService = usersService;
     }
 
-    public void registerUser(CustomerRegistrationDto customerRegistrationDto) {
-        if (usersService.getUserByEmail(customerRegistrationDto.getEmail().trim()).isPresent()) {
-            throw new UserExistsException("User with email " + customerRegistrationDto.getEmail() + "already exists in database");
+    public void registerUser(CustomerRegistrationDto dto) {
+        boolean userExists = usersService.getUserByEmail(dto.getEmail().trim()).isPresent();
+        //todo 9 - jeśli istnieje już taki użytkownik to należy zgłosić wyjątek (metoda showExceptionThatUserExists),
+        //todo 9 natomiast jeśli takiego jeszcze nie ma to można go zarejestrować (metoda rewriteDataAndRegisterUser
+        if (userExists) {
+            showExceptionThatUserExists(dto);
         } else {
-            User user = UserRegistrationDtoToUserBuilder.rewriteToUser(customerRegistrationDto, passwordEncoder);
-            usersService.addUser(user);
+            rewriteDataAndRegisterUser(dto);
         }
+    }
+
+    private void rewriteDataAndRegisterUser(CustomerRegistrationDto dto) {
+        User user = UserRegistrationDtoToUserBuilder.rewriteToUser(dto, passwordEncoder);
+        usersService.addUser(user);
+    }
+
+    private void showExceptionThatUserExists(CustomerRegistrationDto dto) {
+        throw new UserExistsException("User with email " + dto.getEmail() + "already exists in database");
     }
 }
