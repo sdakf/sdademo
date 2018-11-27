@@ -7,8 +7,6 @@ public enum Countries {
 
     POLAND("PL","Polska"),
     //todo 7 dopisać dwa kraje
-    GERMANY("DE", "Niemcy"),
-    ENGLAND("ENG", "Anglia"),
     FRANCE("FRA", "Francja");
 
     private String symbol;

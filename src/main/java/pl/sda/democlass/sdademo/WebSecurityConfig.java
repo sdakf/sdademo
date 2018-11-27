@@ -27,8 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 //todo 14 - należy uzupełnić zabezpieczane urle
-                .antMatchers("/todos/**").hasAnyAuthority("ROLE_USER")
-                .antMatchers("/login").permitAll()
+                .antMatchers(null).hasAnyAuthority("ROLE_USER")
+                .antMatchers(null).permitAll()
                 .anyRequest().permitAll()
                 .and()
                 .csrf().disable()

@@ -42,12 +42,7 @@ public class UsersService {
         boolean userExists = false;
         List<User> users = usersRepository.findAll();
         //todo 11 - tworzymy testowego użytkownika tylko jeśli już taki nie istnieje
-        for (User user : users) {
-            if (username.equalsIgnoreCase(user.getEmail())) {
-                userExists = true;
-                break;
-            }
-        }
+
         if (!userExists) {
             User user = new User();
             user.setEmail(username);

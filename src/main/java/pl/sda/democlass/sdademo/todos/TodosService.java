@@ -52,18 +52,7 @@ public class TodosService {
         User currentUser = getCurrentUser();
         List<Todo> allTodos = todosRepository.findAll();
         //todo 13 - należy uzupełnić dla aktualnego użytkownika listy zadań do zrobienia oraz zrobionych
-        List<Todo> doneList = new ArrayList<>();
-        List<Todo> todoList = new ArrayList<>();
-        for (Todo todo : allTodos) {
-            if (!todo.getUserEmail().equalsIgnoreCase(currentUser.getEmail())) {
-                continue;
-            }
-            if (todo.isCompleted()) {
-                doneList.add(todo);
-            } else {
-                todoList.add(todo);
-            }
-        }
+
         model.addAttribute("todosList", todoList);
         model.addAttribute("todosDoneList", doneList);
     }

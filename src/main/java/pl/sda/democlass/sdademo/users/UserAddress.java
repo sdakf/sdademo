@@ -21,8 +21,4 @@ import java.util.List;
 public class UserAddress {
 
     //todo 6 - uzupełnienie pól adresu
-    private String street;
-    private String city;
-    private String country;
-    private String zipCode;
 }

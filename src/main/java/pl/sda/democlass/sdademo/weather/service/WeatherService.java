@@ -46,13 +46,7 @@ public class WeatherService {
         String userEmail = userContextHolder.getUserLoggedIn();
         User user = usersService.getUserByEmail(userEmail).orElse(null);
         //todo 8 - należy uzupełnić wartości city i country w zależności od tego czy użytkownik jest zalogowany czy nie
-        if (user == null) {
-            city = "Warszawa";
-            country = "pl";
-        } else {
-            city = user.getUserAddress().getCity();
-            country = user.getUserAddress().getCountry();
-        }
+
         String cityWithCountry = city + "," + country.toUpperCase();
         CompletableFuture<WeatherResult> forecast = openWeatherMapJ8.currentByCity(cityWithCountry, key, "metric", "pl");
 

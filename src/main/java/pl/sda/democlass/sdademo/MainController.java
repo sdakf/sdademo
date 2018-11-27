@@ -57,9 +57,7 @@ public class MainController {
         model.addAttribute("customerRegistrationDto", customerRegistrationDto);
         model.addAttribute("countries", Countries.values());
         //todo 3 - w przypadku błędów walidacji należy przekierować ponownie na formularz rejestracji
-        if (bindingResult.hasErrors()) {
-            return "registerForm";
-        }
+
         try {
             userRegistrationService.registerUser(customerRegistrationDto);
         } catch (UserExistsException e) {

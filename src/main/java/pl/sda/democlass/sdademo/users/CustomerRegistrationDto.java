@@ -19,7 +19,7 @@ public class CustomerRegistrationDto {
     private String password;
     @Pattern(regexp = "^[\\w\\.]+@[\\w]+\\.[\\w]+(\\.[a-z]{2,3})?$", message = "Zły format adresu email")
     private String email;
-    @Pattern(regexp = "^\\d{11}$", message = "Zły format. Numer PESEL powinien składać się z 11 cyfr")
+    @Pattern(regexp = "" /*todo 2 - należy uzupełnić poprawny regex*/, message = "Zły format. Numer PESEL powinien składać się z 11 cyfr")
     private String pesel;
     @Pattern(regexp = "^(19|20)[0-9]{2}-(0[1-9]|1[0-2])-(0[1-9]|(1|2)[0-9]|3[0-1])$", message = "Zły format. Data urodzin powinna być podana w formacie RRRR-MM-DD")
     private String birthDate;

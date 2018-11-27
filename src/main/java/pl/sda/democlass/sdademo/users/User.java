@@ -16,12 +16,7 @@ import java.util.Set;
 @NoArgsConstructor
 public class User extends BaseEntity {
     //todo 1 - uzupełnić pola użytkownika
-    private String firstName;
-    private String surName;
-    private String email;
-    private String pesel;
-    private String passwordHash;
-    private String birthDate;
+
     private UserAddress userAddress;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})

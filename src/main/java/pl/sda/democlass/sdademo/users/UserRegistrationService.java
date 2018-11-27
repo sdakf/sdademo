@@ -20,11 +20,7 @@ public class UserRegistrationService {
         boolean userExists = usersService.getUserByEmail(dto.getEmail().trim()).isPresent();
         //todo 9 - jeśli istnieje już taki użytkownik to należy zgłosić wyjątek (metoda showExceptionThatUserExists),
         //todo 9 natomiast jeśli takiego jeszcze nie ma to można go zarejestrować (metoda rewriteDataAndRegisterUser
-        if (userExists) {
-            showExceptionThatUserExists(dto);
-        } else {
-            rewriteDataAndRegisterUser(dto);
-        }
+
     }
 
     private void rewriteDataAndRegisterUser(CustomerRegistrationDto dto) {

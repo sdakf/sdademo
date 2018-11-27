@@ -18,12 +18,5 @@ import java.util.Date;
 public class Todo extends BaseEntity {
 
     //todo 12 - należy uzupełnić wartości encji "zadanie"
-    private String todoValue;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date deadline;
-
-    private String userEmail;
-
-    private boolean completed;
 }
