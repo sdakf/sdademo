@@ -129,7 +129,7 @@ function removeItem(element) {
             $(element).parent().remove();
         },
         error: function () {
-            alert('Nie można usunąć!');
+            alert('Nie można usunąć, wpisane zadanie już istnieje!');
         }
     });
 
